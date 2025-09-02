@@ -1,69 +1,29 @@
-# React + TypeScript + Vite
+# Frontend PetShop 🐾
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend PetShop é um projeto de treinamento desenvolvido com **Next.js, TypeScript e TailwindCSS**. O foco principal é praticar o uso da **Context API** do React para gerenciar o estado global do carrinho de compras.
 
-Currently, two official plugins are available:
+## Páginas do projeto
+- **Home**: lista de produtos disponíveis.  
+- **Detalhes do Produto**: informações detalhadas de cada produto e opção de adicionar ao carrinho.  
+- **Carrinho**: visualização e gerenciamento dos produtos adicionados.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
+- Adicionar produtos ao carrinho.  
+- Remover produtos do carrinho.  
+- Atualizar quantidade de produtos.  
+- Gerenciamento de estado global com Context API.
 
-## Expanding the ESLint configuration
+## Tecnologias
+- [Next.js](https://nextjs.org/)  
+- [TypeScript](https://www.typescriptlang.org/)  
+- [TailwindCSS](https://tailwindcss.com/)  
+- [React Context API](https://react.dev/reference/react/useContext)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Instalação
+Clone o repositório:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+```bash
+git clone https://github.com/seu-usuario/frontend-petshop.git
+cd frontend-petshop
+npm install
+npm run dev
