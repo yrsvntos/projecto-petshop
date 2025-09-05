@@ -1,5 +1,6 @@
 import { useState, createContext, type ReactNode } from "react";
 import { type ProdutosProps } from "../pages/home";
+import toast from "react-hot-toast";
 
 interface CartContextData{
     cart: CartProps[];
@@ -7,6 +8,8 @@ interface CartContextData{
     addCartItem: (novoProduto: ProdutosProps) => void;
     removeCartItem: (produto: CartProps) => void;
     total: string;
+    clearCart: () => void;
+    
 }
 
 interface CartProps{
@@ -50,23 +53,34 @@ export function CartProvider({children}: CartProviderProps){
         }
         setCart(produtos => [...produtos, data]);
         totalResultCart([...cart, data])
-        return;
+        
     }
 
     
     function removeCartItem(produto: CartProps){
 
-        const indexItem = cart.findIndex(item => item.id != produto.id);
+        const indexItem = cart.findIndex(item => item.id === produto.id);
 
-        if(cart[indexItem]?.amount > 1 ){
-
-            let cartList = cart;
+        if(cart[indexItem]?.amount > 1){
+            let cartList =  cart;
             cartList[indexItem].amount = cartList[indexItem].amount - 1;
             cartList[indexItem].total = cartList[indexItem].total - cartList[indexItem].price;
-            setCart(cartList)
+            toast.success("Produto removido do carrinho!",
+                {
+                    style: {
+                        borderRadius: 10,
+                        backgroundColor: "#121212",
+                        color: "#fff"
+                    }
+                }
+            );
+            setCart(cartList);
+            totalResultCart(cartList);
+            return;
         }
 
-        const removeItem = cart.filter(item => item.id != produto.id);
+        const removeItem = cart.filter(item => item.id !== produto.id);
+        toast.success("Produto removido do carrinho!");
         setCart(removeItem);
         totalResultCart(removeItem)
 
@@ -78,6 +92,10 @@ export function CartProvider({children}: CartProviderProps){
         const resultFormat = result.toLocaleString("pt-BR", {style: "currency", currency: "EUR"});
         setTotal(resultFormat);
     }
+
+    function clearCart(){
+        setCart([]);
+    }
     return(
         <CartContext.Provider 
             value={{
@@ -85,7 +103,8 @@ export function CartProvider({children}: CartProviderProps){
                 cartAmount: cart.length,
                 addCartItem,
                 removeCartItem,
-                total
+                total,
+                clearCart
             }}
         >
             {children}
